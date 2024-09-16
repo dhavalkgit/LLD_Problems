@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class StockManager {
     private Map<String,Ingredient> stocks;
-    private static StockManager stockManager=null;
+    private static volatile StockManager stockManager=null;
 
     private StockManager(){
         stocks=new HashMap<>();
@@ -13,7 +13,13 @@ public class StockManager {
     }
 
     public static StockManager getStockManager(){
-        if(stockManager==null) stockManager=new StockManager();
+        if (stockManager == null) {
+            synchronized (StockManager.class) {
+                if (stockManager == null) {
+                    stockManager = new StockManager();
+                }
+            }
+        }
         return stockManager;
     }
     private void initializeStock() {
