@@ -15,7 +15,12 @@ public class AcceptCache implements MachineState{
         Scanner sc = new Scanner(System.in);
         System.out.println("please Enter Your cache...");
         cache = sc.nextInt();
+        if(vendingMachine.getInventory().getItemByName(vendingMachine.getSelectedItem()).getPrice()>cache){
+            vendingMachine.setSelectedItem(null);
+            vendingMachine.changeState(new SelectItem(vendingMachine));
+            throw new RuntimeException("entered cache is lees");
+        }
         vendingMachine.setInsertedCache(cache);
-        vendingMachine.changeState(new SelectItem(vendingMachine));
+        vendingMachine.changeState(new DispenseChange(vendingMachine));
     }
 }

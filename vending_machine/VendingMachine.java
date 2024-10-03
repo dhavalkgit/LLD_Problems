@@ -9,7 +9,7 @@ public class VendingMachine {
 
     private  VendingMachine(){
         this.insertedcache=0;
-        this.state= new AcceptCache(this);
+        this.state= new SelectItem(this);
         this.inventory = InventoryManager.getInstance();
         this.selectedItem=null;
     }

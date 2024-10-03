@@ -16,14 +16,12 @@ public class SelectItem implements MachineState {
         System.out.println("Please select Item..");
         String name = sc.nextLine();
 
-        if(vendingMachine.getInventory().isAvailable(name,1) &&
-                vendingMachine.getInventory().getItemByName(name).getPrice()<=vendingMachine.getInsertedCache()){
+        if(vendingMachine.getInventory().isAvailable(name,1) ){
             vendingMachine.setSelectedItem(name);
-            vendingMachine.changeState(new DispenseChange(vendingMachine));
+            vendingMachine.changeState(new AcceptCache(vendingMachine));
         }
         else{
-            throw new RuntimeException("Item is not available or inserted cache is less");
+            throw new RuntimeException("Item is not available");
         }
-        sc.close();
     }
 }

@@ -7,8 +7,8 @@ public class VendingMachineDemo {
         vendingMachine.getInventory().addItem(new Item("pepsi",10, 20));
         vendingMachine.getInventory().addItem(new Item("sprite",10, 20));
 
-        vendingMachine.getCurrentState().acceptCache();
         vendingMachine.getCurrentState().selectItem();
+        vendingMachine.getCurrentState().acceptCache();
         vendingMachine.getCurrentState().dispenseChange();
         vendingMachine.getCurrentState().dispenseItem();
     }
